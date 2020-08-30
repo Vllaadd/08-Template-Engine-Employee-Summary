@@ -79,20 +79,47 @@ function restartInquirer(){
     });
 }
 
-function readInternFile(internData){
-
+function readEngFile(engineerData){
+    fs.readFile('./html/engineer.html', 'utf8', function(error, data){
+        const newData = data
+        .replace('Ename:', engineerData.name)
+        .replace('Eid:', engineerData.id)
+        .replace('Memail:', engineerData.email)
+        .replace('Mphone', engineerData.officeNumber);
+        html += newData;
+    });
 }
 
 function readMgnFile(managerData){
-
+    fs.readFile('html/engineer.html', 'utf8', function(error, data){
+        const newData = data
+        .replace('Mname:', managerData.name)
+        .replace('Mid:', managerData.id)
+        .replace('Memail:', managerData)
+        .replace('MofficeNumber:', managerData.officeNumber)
+        html += newData;
+    });
 }
 
 function readInternFile(internData){
+    fs.readFile('./html/intern.html', 'utf8', function(error, data){
+        const newData = data
+        .replace('Iname:', internData.name)
+        .replace('Iid', internData.id)
+        .replace('Iemail', internData,internSchool);
+        html += newData;
+    })
 
 }
 
 function createHTML(){
-
+    fs.readFile('./html/main.html', 'utf8', (error, data) => {
+        const newData = data.replace('{{html}}', html);
+        fs.writeFile('./output/index.html', newData, 'utf8', error => {
+            if (error) 
+            return console.log(error);
+        });
+    })
 }
 
 module.exports = {};
