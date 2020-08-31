@@ -1,11 +1,10 @@
 const fs = require('fs')
 const inquirer = require('inquirer');
-const questions = require('./lib/questions')
-const Employee = require('./lib/employee')
-const Engineer = require('./lib/engineer')
-const Intern = require('./lib/intern')
-const Manager = require('./lib/manager');
-const { async } = require('rxjs');
+const questions = require('./lib/questions');
+let html = '';
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+const Manager = require('./lib/Manager');
 
 function createEmployee(){
     inquirer
@@ -68,11 +67,11 @@ function restartInquirer(){
     .prompt(questions.newQuestion)
     .then(answer => {
         switch (answer.role){
-            case 'Yes!!!':
+            case 'Yes.':
         createEmployee();
         break;
 
-        case 'Nope, that`s everyone!':
+        case 'Nope, that`s everyone.':
             createHTML();
             break;
         }
@@ -80,9 +79,11 @@ function restartInquirer(){
 }
 
 function readEngFile(engineerData){
+    const icon = `<i class="fas fa-glasses fa-2x"></i>`;
     fs.readFile('./html/engineer.html', 'utf8', function(error, data){
         const newData = data
         .replace('Ename:', engineerData.name)
+        .replace("Eicon:", icon)
         .replace('Eid:', engineerData.id)
         .replace('Memail:', engineerData.email)
         .replace('Mphone', engineerData.officeNumber);
@@ -91,35 +92,41 @@ function readEngFile(engineerData){
 }
 
 function readMgnFile(managerData){
+    const icon = `<i class="far fa-chart-bar fa-2x"></i>`;
     fs.readFile('html/engineer.html', 'utf8', function(error, data){
         const newData = data
         .replace('Mname:', managerData.name)
+        .replace("Micon:", icon)
         .replace('Mid:', managerData.id)
-        .replace('Memail:', managerData)
+        .replace('Memail:', managerData.email)
         .replace('MofficeNumber:', managerData.officeNumber)
         html += newData;
     });
 }
 
 function readInternFile(internData){
+    const icon = `<i class="fas fa-eye fa-2x"></i>`;
     fs.readFile('./html/intern.html', 'utf8', function(error, data){
         const newData = data
         .replace('Iname:', internData.name)
+        .replace("Iicon:", icon)
         .replace('Iid', internData.id)
-        .replace('Iemail', internData,internSchool);
+        .replace('Iemail', internData.email)
+        .replace('Ischool', internData.internSchool);
         html += newData;
     })
 
 }
 
 function createHTML(){
-    fs.readFile('./html/main.html', 'utf8', (error, data) => {
+    fs.readFile('./html/mainFile.html', 'utf8', (err, data) => {
         const newData = data.replace('{{html}}', html);
-        fs.writeFile('./output/index.html', newData, 'utf8', error => {
-            if (error) 
-            return console.log(error);
+        fs.writeFile('./index.html', newData, 'utf8', err => {
+            if (err) 
+            return console.log(err);
         });
-    })
+        console.log('.html created');
+    });
 }
 
 module.exports = {};
