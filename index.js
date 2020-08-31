@@ -94,7 +94,7 @@ function readEngFile(engineerData){
 
 function readMgnFile(managerData){
     const icon = `<i class="far fa-chart-bar fa-2x"></i>`;
-    fs.readFile('html/engineer.html', 'utf8', function(error, data){
+    fs.readFile('./html/manager.html', 'utf8', function(error, data){
         const newData = data
         .replace('Mname:', managerData.name)
         .replace("Micon:", icon)
