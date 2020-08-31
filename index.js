@@ -68,7 +68,7 @@ function restartInquirer(){
     .prompt(questions.newQuestion)
     .then(answer => {
         switch (answer.role){
-            case 'Yes!!!';
+            case 'Yes!!!':
         createEmployee();
         break;
 
