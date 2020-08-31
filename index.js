@@ -40,6 +40,7 @@ function createEmployee(){
 
                     restartInquirer();
                 });
+                break;
             case 'Intern':
                 inquirer 
                 .prompt(questions.internQuestion)
@@ -85,8 +86,8 @@ function readEngFile(engineerData){
         .replace('Ename:', engineerData.name)
         .replace("Eicon:", icon)
         .replace('Eid:', engineerData.id)
-        .replace('Memail:', engineerData.email)
-        .replace('Mphone', engineerData.officeNumber);
+        .replace('Eemail:', engineerData.email)
+        .replace('Egithub', engineerData.github);
         html += newData;
     });
 }
@@ -99,7 +100,7 @@ function readMgnFile(managerData){
         .replace("Micon:", icon)
         .replace('Mid:', managerData.id)
         .replace('Memail:', managerData.email)
-        .replace('MofficeNumber:', managerData.officeNumber)
+        .replace('Mphone:', managerData.officeNumber)
         html += newData;
     });
 }
@@ -112,7 +113,7 @@ function readInternFile(internData){
         .replace("Iicon:", icon)
         .replace('Iid', internData.id)
         .replace('Iemail', internData.email)
-        .replace('Ischool', internData.internSchool);
+        .replace('Ischool', internData.school);
         html += newData;
     })
 
