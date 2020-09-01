@@ -1,24 +1,24 @@
-const fs = require('fs')
-const inquirer = require('inquirer');
+const fs = require('fs') // fs is necessary to read the data
+const inquirer = require('inquirer'); //inquirer is an easily embeddable and beautiful command line interface. 
 const questions = require('./lib/questions');
-let html = '';
+let html = ''; //empty string for the generated card data to be loaded to the html. It goes to mainFile.js. We give it a value after running the function for reading data for each card. 
 const Engineer = require('./lib/Engineer')
 const Intern = require('./lib/Intern')
 const Manager = require('./lib/Manager');
 
 function createEmployee(){
     inquirer
-    .prompt(questions.employeeQuestion)
-    .then(answers => {
+    .prompt(questions.employeeQuestion) //here we reach to the "questions" file and go through the object with questions. 
+    .then(answers => { //FUNCTION(ANSWERS){} ???
         switch(answers.role){
             case 'Engineer':
                 inquirer
                 .prompt(questions.engineerQuestion)
                 .then(engineerAnswers => {
-                    const engineerData = new Engineer(
+                    const engineerData = new Engineer( //here we create a new object with elements that will be input by the user. 
                         answers.name,
                         answers.id,
-                        answers.email,
+                        answers.email, //first three we use answers parameter as it`s from Employee file, not Engineer card. 
                         engineerAnswers.github
                     );
                     readEngFile(engineerData);
@@ -79,10 +79,10 @@ function restartInquirer(){
     });
 }
 
-function readEngFile(engineerData){
+function readEngFile(engineerData){ //this is how  we read data in the html file for each role. 
     const icon = `<i class="fas fa-glasses fa-2x"></i>`;
     fs.readFile('./html/engineer.html', 'utf8', function(error, data){
-        const newData = data
+        const newData = data //new variable that we create here consists of whatever values the users input. 
         .replace('Ename:', engineerData.name)
         .replace("Eicon:", icon)
         .replace('Eid:', engineerData.id)
@@ -133,3 +133,12 @@ function createHTML(){
 module.exports = {};
 
 createEmployee();
+
+
+// 1. Index.js prompts the questions from questions.js file. 
+
+// 2. (index.js) After the questions are answers, new object is built with the answers
+
+// 3. (index.js / role.html) After we have this new object, we read the html employee card and use method “replace” to replace the the space in the card with the actual data
+
+// 4. (index.js / mainFile.html) After the cards are replaced with the data we add that card into the html file (html += newData) 

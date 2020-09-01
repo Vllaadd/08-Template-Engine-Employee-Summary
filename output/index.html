@@ -11,51 +11,6 @@
     <title>Employee Summary</title>
 </head>
 <body>
-    <style>
-        body{
-    background-color: #F5F5DC;
-}
-.nav{
-    height: 200px;
-    background-color: #7FDBFF;
-    color: black;
-    display: flex;
-    align-items: center;
-    border-radius: 0 0 10px 10px;
-    margin-bottom: 50px;
-}
-
-.row{
-    display: flex;
-    justify-content: space-around;
-}
-
-.card{
-    width: 18rem;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 60px;
-    background-color: #33FF8A;
-    box-shadow: 2.5px 4px rgb(138, 137, 137);
-}
-
-.list-group-item{
-    background-color: rgba(240, 240, 240, 0.913);
-}
-
-.card-subtitle{
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-footer{
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    text-align: center;
-}
-
-    </style>
     <div class="container">
         <header>
             <ul class="nav justify-content-center">
@@ -65,7 +20,17 @@ footer{
             </ul>
         </header>
         <div class="row">
-            {{html}} 
+            <div class="card" style="width: 18rem;">
+    <div class="card-body justify-content-center">
+        <h5 class="card-subtitle justify-content-center">trede</h5>
+        <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-glasses fa-2x"></i></h6>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID:Eid</li>
+            <li class="list-group-item">EMAIL:Eemail</li>
+            <li class="list-group-item">GITHUB:undefined</li>
+        </ul>
+    </div>
+</div> <!--this is the empty string we created in index.js which we use for the generated card data to be loaded to the html-->
         </div>
     </div>
 </body>
