@@ -8,7 +8,7 @@ const Manager = require('./lib/Manager');
 
 function createEmployee(){
     inquirer
-    .prompt(questions.employeeQuestion) //here we reach to the "questions" file and go through the object with questions. 
+    .prompt(questions.employeeQuestions) //here we reach to the "questions" file and go through the object with questions. 
     .then(answers => { //FUNCTION(ANSWERS){} is this the alternative form of this function ?????????
         switch(answers.role){
             case 'Engineer':
@@ -86,8 +86,8 @@ function readEngineerFile(engineerData){ //this is how  we read data in the html
         const newData = data //new variable that we create here consists of whatever values the users input. 
         .replace('Ename:', engineerData.name)
         .replace('Eicon:', icon)
-        .replace('Eid:', engineerData.id)
-        .replace('Eemail:', engineerData.email)
+        .replace('Eid', engineerData.id)
+        .replace('Eemail', engineerData.email)
         .replace('Egithub', engineerData.github);
         html += newData;
     });
@@ -98,11 +98,11 @@ function readManagerFile(managerData){
     const icon = `<i class="far fa-chart-bar fa-2x"></i>`;
     fs.readFile('./html/manager.html', 'utf8', function(error, data){
         const newData = data
-        .replace('Mname:', managerData.name)
-        .replace('Micon:', icon)
-        .replace('Mid:', managerData.id)
-        .replace('Memail:', managerData.email)
-        .replace('Mphone:', managerData.officeNumber);
+        .replace('Mname', managerData.name)
+        .replace('Micon', icon)
+        .replace('Mid', managerData.id)
+        .replace('Memail', managerData.email)
+        .replace('Mphone', managerData.officeNumber);
         html += newData;
     });
 }
