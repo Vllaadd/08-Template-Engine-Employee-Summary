@@ -2,14 +2,14 @@ const fs = require('fs') // fs is necessary to read the data
 const inquirer = require('inquirer'); //inquirer is an easily embeddable and beautiful command line interface. 
 const questions = require('./lib/questions');
 let html = ''; //empty string for the generated card data to be loaded to the html. It goes to mainFile.js. We give it a value after running the function for reading data for each card. 
-const Engineer = require('./lib/Engineer')
-const Intern = require('./lib/Intern')
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
 function createEmployee(){
     inquirer
     .prompt(questions.employeeQuestion) //here we reach to the "questions" file and go through the object with questions. 
-    .then(answers => { //FUNCTION(ANSWERS){} ???
+    .then(answers => { //FUNCTION(ANSWERS){} is this the alternative form of this function ?????????
         switch(answers.role){
             case 'Engineer':
                 inquirer
@@ -21,7 +21,7 @@ function createEmployee(){
                         answers.email, //first three we use answers parameter as it`s from Employee file, not Engineer card. 
                         engineerAnswers.github
                     );
-                    readEngFile(engineerData);
+                    readEngineerFile(engineerData);
 
                     restartInquirer();
                 });
@@ -36,7 +36,7 @@ function createEmployee(){
                         answers.email,
                         managerAnswers.officeNumber
                     );
-                    readMgnFile(managerData);
+                    readManagerFile(managerData);
 
                     restartInquirer();
                 });
@@ -79,12 +79,13 @@ function restartInquirer(){
     });
 }
 
-function readEngFile(engineerData){ //this is how  we read data in the html file for each role. 
+function readEngineerFile(engineerData){ //this is how  we read data in the html file for each role. 
+    // console.log(engineerData);
     const icon = `<i class="fas fa-glasses fa-2x"></i>`;
     fs.readFile('./html/engineer.html', 'utf8', function(error, data){
         const newData = data //new variable that we create here consists of whatever values the users input. 
         .replace('Ename:', engineerData.name)
-        .replace("Eicon:", icon)
+        .replace('Eicon:', icon)
         .replace('Eid:', engineerData.id)
         .replace('Eemail:', engineerData.email)
         .replace('Egithub', engineerData.github);
@@ -92,30 +93,32 @@ function readEngFile(engineerData){ //this is how  we read data in the html file
     });
 }
 
-function readMgnFile(managerData){
+function readManagerFile(managerData){
+    // console.log(managerData);
     const icon = `<i class="far fa-chart-bar fa-2x"></i>`;
     fs.readFile('./html/manager.html', 'utf8', function(error, data){
         const newData = data
         .replace('Mname:', managerData.name)
-        .replace("Micon:", icon)
+        .replace('Micon:', icon)
         .replace('Mid:', managerData.id)
         .replace('Memail:', managerData.email)
-        .replace('Mphone:', managerData.officeNumber)
+        .replace('Mphone:', managerData.officeNumber);
         html += newData;
     });
 }
 
 function readInternFile(internData){
+    // console.log(internData);
     const icon = `<i class="fas fa-eye fa-2x"></i>`;
     fs.readFile('./html/intern.html', 'utf8', function(error, data){
         const newData = data
         .replace('Iname:', internData.name)
-        .replace("Iicon:", icon)
+        .replace('Iicon:', icon)
         .replace('Iid', internData.id)
         .replace('Iemail', internData.email)
         .replace('Ischool', internData.school);
         html += newData;
-    })
+    });
 
 }
 
