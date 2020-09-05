@@ -124,7 +124,7 @@ function readInternFile(internData){
 
 function createHTML(){
     fs.readFile('./html/mainFile.html', 'utf8', (err, data) => {
-        const newData = data.replace('html', html);
+        const newData = data.replace('{{html}}', html);
         fs.writeFile('./index.html', newData, 'utf8', err => {
             if (err) 
             return console.log(err);
