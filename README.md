@@ -3,6 +3,10 @@
 # Overview
 Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person.
 
+# Demo video 
+
+![](demo_video/employee_summary.gif)
+
 
 # Technologies used:
 
